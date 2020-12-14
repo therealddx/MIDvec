@@ -1,25 +1,18 @@
-//MIDvec Library.
-	//Machine learning.
-	//Image development.
-	//Digital signal processing.
-	//Vectors.
-		//(and more)
-
-//Commercial license for MIDvec: Terms stated at Binpress site.
-//Contact is available through the Binpress site.
-
+/*
+ * reference LICENSE file provided.
+ * 
+ * misc_math.h.
+ * miscellaneous methods to make general math operations easier within this library.
+ * 
+ */
+ 
 #ifndef MISC_MATH_H
 #define MISC_MATH_H
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-#include "cpx_vec.h"
-#include "dsp.h"
-#include "ann.h"
-#include "bitmap.h"
-#include "sort.h"
+#include <complex.h>
 
 //Misc math.
 double hard_limit(double x) {

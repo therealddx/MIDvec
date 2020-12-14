@@ -1,12 +1,12 @@
-//MIDvec Library.
-	//Machine learning.
-	//Image development.
-	//Digital signal processing.
-	//Vectors.
-		//(and more)
-
-//Commercial license for MIDvec: Terms stated at Binpress site.
-//Contact is available through the Binpress site.
+/*
+ * reference LICENSE file provided.
+ * 
+ * dsp.h.
+ * Header file for core digital-signal-processing functionality.
+ * Declares convolution, correlation, frequency-domain analysis, and 
+ * filtering functions.
+ * 
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
