@@ -95,7 +95,7 @@ printf("fft: depth is %d\n", depth);
       tw_m = 0;
     } // printf("y_int loop done\r\n");
     
-    Xkbuf = copy_cvec(Xk);
+    Xk = copy_cvec(Xkbuf);
     
     depth--;
     inst_N <<= 1;
