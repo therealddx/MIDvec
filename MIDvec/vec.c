@@ -55,3 +55,13 @@ cvec_o copy_cvec(cvec_o arg_cvec)
   return toReturn;
 }
 
+void del_dvec(dvec_o arg_dvec)
+{
+  free(arg_dvec.arr);
+}
+
+void del_cvec(cvec_o arg_cvec)
+{
+  free(arg_cvec.arr);
+}
+

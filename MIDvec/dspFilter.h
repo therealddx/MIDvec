@@ -1,46 +1,21 @@
 /*
  * reference LICENSE file provided.
  * 
- * dsp.h.
- * Header file for core digital-signal-processing functionality.
- * Declares convolution, correlation, frequency-domain analysis, and 
- * filtering functions.
+ * dspFilter.h.
+ * Header file for DSP filter operations:
+ *  Selecting and generating window functions for stopband gain.
+ *  Generating impulse response for a filter.
+ *  Generating filter functions for a comprehensive convolution filter.
  * 
  */
 
-#ifndef DSP_H
-#define DSP_H
+#ifndef DSPFILTER_H
+#define DSPFILTER_H
 
-// include: c-standard library.
-// 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <complex.h>
+#include <assert.h>
 
-// include: self library.
-// 
-#include "misc_math.h"
-
-// conv.
-// Convolve xn with hn. Output is same length as longest of xn and hn.
-// 
-dvec_o conv(dvec_o xn, dvec_o hn);
-
-// corr.
-// Correlate xn with hn. Output is same length as longest of xn and hn.
-// 
-dvec_o corr(dvec_o xn, dvec_o hn);
-
-// fft.
-// Calculate FFT of xn.
-// 
-cpx_vec_o fft(cpx_vec_o xn);
-
-// ifft.
-// Calculate inverse FFT of frequency-domain representation, Xk.
-// 
-cpx_vec_o ifft(cpx_vec_o Xk);
+#include <vec.h>
+#include <opvec.h>
 
 enum WindowSelection
 {
@@ -53,42 +28,68 @@ enum WindowSelection
 // pick_window.
 // Given desired stopband gain, select necessary window.
 // 
-WindowSelection pick_window(double stopband_gain);
-dvec_o generate_window(WindowSelection which_window, int window_length);
-int get_filter_length(double w_1, double w_2, double stopband_gain);
+WindowSelection pick_window(double arg_stopbandGain);
+
+// generate_window.
+// Given desired WindowSelection, generate window function signal.
+//
+dvec_o generate_window(
+  WindowSelection arg_whichWindow, int32_t arg_windowLen);
+
+// get_filter_length.
+//
+// Given desired digital frequency cutoffs 'w_1' and 'w_2', and desired
+// stopband gain, calculate necessary filter length.
+//
+int32_t get_filter_length(double w_1, double w_2, double stopband_gain);
 
 // generate_lowpass_impulse_response.
-// Given FIR filter parameters, calculate a lowpass-filter impulse response with sinc().
-// 
-dvec_o generate_lowpass_impulse_response(int filter_length, double wc);
-
 // generate_highpass_impulse_response.
-// Given FIR filter parameters, calculate a highpass-filter impulse response with sinc().
+//
+// Given filter length and digital frequency cutoffs,
+//   generate low-pass / high-pass impulse response.
 // 
-dvec_o generate_highpass_impulse_response(int filter_length, double wc);
+dvec_o generate_lowpass_impulse_response(
+  int32_t arg_filterLen, double arg_wc);
+
+dvec_o generate_highpass_impulse_response(
+  int32_t arg_filterLen, double arg_wc);
 
 // generate_lowpass_filter.
-// Return a function such that, on convolution with an input signal,
-// that input signal is lowpass filtered, IAW the input filter arguments.
-// 
-dvec_o generate_lowpass_filter(double wL_1, double wL_2, double stopband_gain);
-
 // generate_highpass_filter.
-// Return a function such that, on convolution with an input signal,
-// that input signal is highpass filtered, IAW the input filter arguments.
-// 
-dvec_o generate_highpass_filter(double wH_1, double wH_2, double stopband_gain);
-
 // generate_bandstop_filter.
-// Return a function such that, on convolution with an input signal,
-// that input signal is bandstop filtered, IAW the input filter arguments.
-// 
-dvec_o generate_bandstop_filter(double wL_1, double wL_2, double wH_1, double wH_2, double stopband_gain);
+// generate_bandpass_filter.
+//
+// Given digital frequency cutoffs and stopband gain values,
+//   generate LPF / HPF / BPS / BPF impulse response.
+//
+dvec_o generate_lowpass_filter
+  ( double wL_1
+  , double wL_2
+  , double stopband_gain
+  );
 
-// generate_highpass_filter.
-// Return a function such that, on convolution with an input signal,
-// that input signal is bandpass filtered, IAW the input filter arguments.
-// 
-dvec_o generate_bandpass_filter(double wL_1, double wL_2, double wH_1, double wH_2, double stopband_gain);
+dvec_o generate_highpass_filter
+  ( double wH_1
+  , double wH_2
+  , double stopband_gain
+  );
 
-#endif
+dvec_o generate_bandstop_filter
+  ( double wL_1
+  , double wL_2
+  , double wH_1
+  , double wH_2
+  , double stopband_gain
+  );
+
+dvec_o generate_bandpass_filter
+  ( double wL_1
+  , double wL_2
+  , double wH_1
+  , double wH_2
+  , double stopband_gain
+  );
+
+#endif // DSPFILTER_H
+

@@ -15,6 +15,7 @@
 double hard_limit(double x);
 
 double rand_given_bound(double lo, double hi);
+
 int int_rand_given_bound(int lo, int hi);
 
 double sinc(double x);
