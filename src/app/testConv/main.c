@@ -2,7 +2,7 @@
  * reference LICENSE file provided.
  * 
  * main.c
- * Application.
+ * Rudimentary application to test convolution.
  * 
  */
 
