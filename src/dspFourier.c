@@ -49,7 +49,7 @@ for (_p = 0; _p < sel_xn.len; _p++)
       sel_xn.arr[_k] - sel_xn.arr[_k + (sel_xn.len >> 1)];
   }
   
-  int32_t depth = (int32_t)(log10((double)Xk.len) / log10(2.0));// - 1;
+  int32_t depth = (int32_t)(log10((double)Xk.len) / log10(2.0)) - 1;
   int32_t y_int = 0;
   int32_t gap = Xk.len >> 1;
   int32_t inst_N = 4;
