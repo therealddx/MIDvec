@@ -24,9 +24,14 @@ cvec_o fft(cvec_o arg_xn)
   while (newLength < arg_xn.len) { newLength <<= 1; } // a.
   sel_xn = new_cvec(newLength); // b.
 
-  u_int64_t  _n = 0; // c. + d.
+  u_int64_t _n = 0; // c. + d.
   for (_n = 0; _n < arg_xn.len; _n++) { sel_xn.arr[_n] = arg_xn.arr[_n]; }
   for (_n = arg_xn.len; _n < newLength; _n++) { sel_xn.arr[_n] = 0; }
+
+printf("fft: all terms in sel_xn:\n");
+int32_t _p = 0;
+for (_p = 0; _p < sel_xn.len; _p++)
+{ printf("%lf + j%lf\n", creal(sel_xn.arr[_p]), cimag(sel_xn.arr[_p])); }
 
   // vars.
   cvec_o Xk = new_cvec(sel_xn.len);
@@ -38,13 +43,13 @@ cvec_o fft(cvec_o arg_xn)
   for (_k = 0; _k < (Xk.len >> 1); _k++)
   {
     Xk.arr[_k] =
-      arg_xn.arr[_k] + arg_xn.arr[_k + (arg_xn.len >> 1)];
+      sel_xn.arr[_k] + sel_xn.arr[_k + (sel_xn.len >> 1)];
 
     Xk.arr[_k + (Xk.len >> 1)] =
-      arg_xn.arr[_k] - arg_xn.arr[_k + (arg_xn.len >> 1)];
+      sel_xn.arr[_k] - sel_xn.arr[_k + (sel_xn.len >> 1)];
   }
   
-  int32_t depth = (int)(log10((double)Xk.len) / log10(2.0)) - 1;
+  int32_t depth = (int32_t)(log10((double)Xk.len) / log10(2.0));// - 1;
   int32_t y_int = 0;
   int32_t gap = Xk.len >> 1;
   int32_t inst_N = 4;
@@ -53,12 +58,13 @@ cvec_o fft(cvec_o arg_xn)
     int32_t tw_m = 0;
     double tw_p = 0;
   
-  // printf("%d, %d, %d, %d, %d\r\n", depth, y_int, gap, inst_N, m);
+printf("fft: initial counter values: %d, %d, %d, %d, %d\n"
+, depth, y_int, gap, inst_N, m);
   
   // run depth-count down.
   while (depth > 0)
   {
-    // printf("Depth is %d\r\n", depth);
+printf("fft: depth is %d\n", depth);
 
     for (y_int = 0; y_int < (gap >> 1); y_int++)
     {
@@ -85,9 +91,9 @@ cvec_o fft(cvec_o arg_xn)
 	//
         
         tw_m++;
-      } //printf("m loop done\r\n");
+      } // printf("m loop done\r\n");
       tw_m = 0;
-    } //printf("y_int loop done\r\n");
+    } // printf("y_int loop done\r\n");
     
     Xkbuf = copy_cvec(Xk);
     

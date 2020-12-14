@@ -27,15 +27,15 @@ typedef struct cvec
   u_int64_t len;
 } cvec_o;
 
-dvec_o new_dvec(u_int64_t arg_len);
-
 dvec_o copy_dvec(dvec_o arg_dvec);
 
-void del_dvec(dvec_o arg_dvec);
+cvec_o copy_cvec(cvec_o arg_cvec);
+
+dvec_o new_dvec(u_int64_t arg_len);
 
 cvec_o new_cvec(u_int64_t arg_len);
 
-cvec_o copy_cvec(cvec_o arg_cvec);
+void del_dvec(dvec_o arg_dvec);
 
 void del_cvec(cvec_o arg_cvec);
 

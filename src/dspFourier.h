@@ -9,9 +9,12 @@
 #ifndef DSPFOURIER_H
 #define DSPFOURIER_H
 
+// include: c standard library.
 #include <sys/types.h>
 #include <math.h>
+#include <stdio.h>
 
+// include: midvec library.
 #include <vec.h>
 
 // fft.
