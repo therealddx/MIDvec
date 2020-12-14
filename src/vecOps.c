@@ -1,4 +1,12 @@
-#include "opvec.h"
+/*
+ * reference LICENSE file provided.
+ *
+ * vecOps.c.
+ * Implements vecOps.h.
+ *
+ */
+
+#include "vecOps.h"
 
 dvec_o mul_dvec(dvec_o arg_v1, dvec_o arg_v2)
 {

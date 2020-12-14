@@ -18,8 +18,8 @@
 #include <stdio.h>
 
 #include <vec.h>
-#include <opvec.h>
-#include <misc_math.h>
+#include <vecOps.h>
+#include <libMath.h>
 
 typedef enum WindowSelection
 {

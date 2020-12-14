@@ -1,10 +1,8 @@
 /*
  * reference LICENSE file provided.
  * 
- * dsp.h.
- * Header file for core digital-signal-processing functionality.
- * Declares convolution, correlation, frequency-domain analysis, and 
- * filtering functions.
+ * main.c
+ * Application.
  * 
  */
 
@@ -12,12 +10,15 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include <vec.h>
+#include <vecOps.h>
 #include <dspConv.h>
 #include <dspFourier.h>
 #include <dspFilter.h>
-#include <misc_math.h>
+#include <libMath.h>
 
 int main()
 {
+  
 }
 

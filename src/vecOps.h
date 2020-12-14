@@ -1,13 +1,13 @@
 /*
  * reference LICENSE file provided.
  *
- * opvec.h.
- * Header file defining operations to be done between vectors.
+ * vecOps.h.
+ * Header file defining operations that can be done between vectors.
  *
  */
 
-#ifndef OPVEC_H
-#define OPVEC_H
+#ifndef VECOPS_H
+#define VECOPS_H
 
 #include <assert.h>
 #include <stdio.h>
@@ -22,5 +22,5 @@ dvec_o add_dvec(dvec_o, dvec_o);
 
 cvec_o add_cvec(cvec_o, cvec_o);
 
-#endif // OPVEC_H
+#endif // VECOPS_H
 
