@@ -13,6 +13,7 @@
 //
 #include <sys/types.h>
 #include <stdlib.h>
+#include <complex.h>
 
 typedef struct dvec
 {

@@ -10,6 +10,9 @@
 #define DSPFOURIER_H
 
 #include <sys/types.h>
+#include <math.h>
+
+#include <vec.h>
 
 // fft.
 // Calculate FFT of xn.

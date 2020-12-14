@@ -6,7 +6,9 @@
  * 
  */
 
-WindowSelection pick_window(double arg_stopbandGain)
+#include "dspFilter.h"
+
+WindowSelection_e pick_window(double arg_stopbandGain)
 {
   // vars.
   int32_t rtn_window = -1;
@@ -29,7 +31,7 @@ WindowSelection pick_window(double arg_stopbandGain)
 }
 
 dvec_o generate_window(
-  WindowSelection arg_whichWindow, int32_t arg_windowLen)
+  WindowSelection_e arg_whichWindow, int32_t arg_windowLen)
 {
   // vars.
   int32_t n = 0;
@@ -86,7 +88,7 @@ int32_t get_filter_length(
   // vars.
   int32_t M = 0;
   double dw = fabs(arg_w1 - arg_w2);
-  WindowSelection sel_window = pick_window(arg_stopbandGain);
+  WindowSelection_e sel_window = pick_window(arg_stopbandGain);
  
   // determine 'M'; filter length, based on window and delta w.
   //
@@ -222,7 +224,7 @@ dvec_o generate_bandstop_filter
   //
   dvec_o hnL = generate_lowpass_filter(arg_wL1, arg_wL2, arg_stopbandGain);
   dvec_o hnH = generate_highpass_filter(arg_wH1, arg_wH2, arg_stopbandGain);
-  dvec_o hn = add_cvec(hnL, hnH);
+  dvec_o hn = add_dvec(hnL, hnH);
 
   // destroy lowpass / highpass; bandpass is now built.
   //
@@ -245,7 +247,7 @@ dvec_o generate_bandpass_filter
   //
   dvec_o hnL = generate_lowpass_filter(arg_wL1, arg_wL2, arg_stopbandGain);
   dvec_o hnH = generate_highpass_filter(arg_wH1, arg_wH2, arg_stopbandGain);
-  dvec_o hn = add_cvec(hnL, hnH);
+  dvec_o hn = add_dvec(hnL, hnH);
 
   // destroy lowpass / highpass; bandpass is now built.
   //
@@ -255,7 +257,7 @@ dvec_o generate_bandpass_filter
   // final processing for bandpass filter.
   //
   int32_t _n = 0;
-  for (_n = 0; _n < hn.len; _n++) { _hn[n] *= -1.0; } 
+  for (_n = 0; _n < hn.len; _n++) { hn.arr[_n] *= -1.0; } 
   hn.arr[(hn.len - 1) / 2] += 1.0;
  
   // ret. 

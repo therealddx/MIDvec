@@ -22,7 +22,7 @@ cvec_o fft(cvec_o arg_xn)
   //  'arg_xn' is no longer relevant; use 'sel_xn'.
   //
   while (newLength < arg_xn.len) { newLength <<= 1; } // a.
-  sel_xn.len = new_cvec(newLength); // b.
+  sel_xn = new_cvec(newLength); // b.
 
   u_int64_t  _n = 0; // c. + d.
   for (_n = 0; _n < arg_xn.len; _n++) { sel_xn.arr[_n] = arg_xn.arr[_n]; }

@@ -1,2 +1,3 @@
 # MIDvec
-Machine Learning, Image Development, DSP - "C" Library
+C library for DSP.
+

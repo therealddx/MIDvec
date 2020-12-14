@@ -13,28 +13,32 @@
 #define DSPFILTER_H
 
 #include <assert.h>
+#include <sys/types.h>
+#include <math.h>
+#include <stdio.h>
 
 #include <vec.h>
 #include <opvec.h>
+#include <misc_math.h>
 
-enum WindowSelection
+typedef enum WindowSelection
 {
   RECTANGULAR = 0, // -21.0 dB stopband attenuation.
   HANNING     = 1, // -44.0 dB stopband attenuation.
   HAMMING     = 2, // -53.0 dB stopband attenuation.
   BLACKMAN    = 3  // -74.0 dB stopband attenuation.
-};
+} WindowSelection_e;
 
 // pick_window.
 // Given desired stopband gain, select necessary window.
 // 
-WindowSelection pick_window(double arg_stopbandGain);
+WindowSelection_e pick_window(double arg_stopbandGain);
 
 // generate_window.
 // Given desired WindowSelection, generate window function signal.
 //
 dvec_o generate_window(
-  WindowSelection arg_whichWindow, int32_t arg_windowLen);
+  WindowSelection_e arg_whichWindow, int32_t arg_windowLen);
 
 // get_filter_length.
 //

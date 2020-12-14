@@ -6,6 +6,8 @@
  *
  */
 
+#include "misc_math.h"
+
 double hard_limit(double x)
 {
   if (x < 0)
