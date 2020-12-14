@@ -41,7 +41,8 @@ dvec_o generate_window(
 // Given desired digital frequency cutoffs 'w_1' and 'w_2', and desired
 // stopband gain, calculate necessary filter length.
 //
-int32_t get_filter_length(double w_1, double w_2, double stopband_gain);
+int32_t get_filter_length(
+  double arg_w1, double arg_w2, double arg_stopbandGain);
 
 // generate_lowpass_impulse_response.
 // generate_highpass_impulse_response.
@@ -64,31 +65,31 @@ dvec_o generate_highpass_impulse_response(
 //   generate LPF / HPF / BPS / BPF impulse response.
 //
 dvec_o generate_lowpass_filter
-  ( double wL_1
-  , double wL_2
-  , double stopband_gain
+  ( double arg_wL1
+  , double arg_wL2
+  , double arg_stopbandGain 
   );
 
 dvec_o generate_highpass_filter
-  ( double wH_1
-  , double wH_2
-  , double stopband_gain
+  ( double arg_wH1
+  , double arg_wH2
+  , double arg_stopbandGain
   );
 
 dvec_o generate_bandstop_filter
-  ( double wL_1
-  , double wL_2
-  , double wH_1
-  , double wH_2
-  , double stopband_gain
+  ( double arg_wL1
+  , double arg_wL2
+  , double arg_wH1
+  , double arg_wH2
+  , double arg_stopbandGain
   );
 
 dvec_o generate_bandpass_filter
-  ( double wL_1
-  , double wL_2
-  , double wH_1
-  , double wH_2
-  , double stopband_gain
+  ( double arg_wL1
+  , double arg_wL2
+  , double arg_wH1
+  , double arg_wH2
+  , double arg_stopbandGain
   );
 
 #endif // DSPFILTER_H

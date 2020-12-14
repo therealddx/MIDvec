@@ -14,7 +14,7 @@
 // fft.
 // Calculate FFT of xn.
 // 
-cvec_o fft(cvec_o xn);
+cvec_o fft(cvec_o arg_xn);
 
 #endif // DSPFOURIER_H
 

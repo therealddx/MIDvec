@@ -6,11 +6,11 @@
  * 
  */
 
-WindowSelection pick_window(double stopband_gain)
+WindowSelection pick_window(double arg_stopbandGain)
 {
   // vars.
   int32_t rtn_window = -1;
-  double stopband_gain_dB = 20.0*log10(stopband_gain);
+  double stopband_gain_dB = 20.0*log10(arg_stopbandGain);
   
   // map desired stopband gain to necessary window.
   // 
@@ -80,11 +80,12 @@ dvec_o generate_window(
   return Wn;
 }
 
-int32_t get_filter_length(double w_1, double w_2, double arg_stopbandGain)
+int32_t get_filter_length(
+  double arg_w1, double arg_w2, double arg_stopbandGain)
 {
   // vars.
   int32_t M = 0;
-  double dw = fabs(w_1 - w_2);
+  double dw = fabs(arg_w1 - arg_w2);
   WindowSelection sel_window = pick_window(arg_stopbandGain);
  
   // determine 'M'; filter length, based on window and delta w.
@@ -151,7 +152,7 @@ dvec_o generate_highpass_impulse_response(
   
   hn.arr[(hn.len - 1) / 2] += 1.0;
  
-  // ret. 
+  // ret.  
   return hn;
 }
 
@@ -217,10 +218,14 @@ dvec_o generate_bandstop_filter
   , double arg_stopbandGain
   )
 {
+  // lowpass / highpass / final impulse responses.
+  //
   dvec_o hnL = generate_lowpass_filter(arg_wL1, arg_wL2, arg_stopbandGain);
   dvec_o hnH = generate_highpass_filter(arg_wH1, arg_wH2, arg_stopbandGain);
   dvec_o hn = add_cvec(hnL, hnH);
 
+  // destroy lowpass / highpass; bandpass is now built.
+  //
   del_dvec(hnL);
   del_dvec(hnH);
  
@@ -236,13 +241,24 @@ dvec_o generate_bandpass_filter
   , double arg_stopbandGain
   )
 {
+  // lowpass / highpass / final impulse responses.
+  //
   dvec_o hnL = generate_lowpass_filter(arg_wL1, arg_wL2, arg_stopbandGain);
   dvec_o hnH = generate_highpass_filter(arg_wH1, arg_wH2, arg_stopbandGain);
   dvec_o hn = add_cvec(hnL, hnH);
-  
-  flipsign_d(hn);
+
+  // destroy lowpass / highpass; bandpass is now built.
+  //
+  del_dvec(hnL);
+  del_dvec(hnH);
+
+  // final processing for bandpass filter.
+  //
+  int32_t _n = 0;
+  for (_n = 0; _n < hn.len; _n++) { _hn[n] *= -1.0; } 
   hn.arr[(hn.len - 1) / 2] += 1.0;
-  
+ 
+  // ret. 
   return hn;
 }
 
