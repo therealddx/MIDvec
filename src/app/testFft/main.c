@@ -25,8 +25,8 @@ double cmag(double complex arg)
 
 int main()
 {
-  cvec_o testSignal = new_cvec(60000);
   int32_t _n = 0;
+  cvec_o testSignal = new_cvec(60000);
   for (_n = 0; _n < testSignal.len; _n++)
   {
     testSignal.arr[_n] = sin(0.5 * (double)_n);
@@ -34,8 +34,11 @@ int main()
 
   cvec_o testFft = fft(testSignal);
 
+  cvec_o testIfft = fft(testFft);
+
   FILE* f_testSignal = fopen("testSignal.csv", "w");
   FILE* f_testFft = fopen("testFft.csv", "w");
+  FILE* f_testIfft = fopen("testIfft.csv", "w");
 
   for (_n = 0; _n < testSignal.len; _n++)
   {
@@ -46,7 +49,13 @@ int main()
   for (_n = 0; _n < testFft.len; _n++)
   {
     fprintf(f_testFft, "%d, %lf\n", _n, cmag(testFft.arr[_n]));
-  } 
+  }
+
+  for (_n = 0; _n < testIfft.len; _n++)
+  {
+    fprintf(f_testIfft, "%d, %lf + j%lf\n",
+      _n, creal(testIfft.arr[_n]), cimag(testIfft.arr[_n]));
+  }
 
   return 0;
 }
