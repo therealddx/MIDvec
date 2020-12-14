@@ -16,10 +16,5 @@
 // 
 cvec_o fft(cvec_o xn);
 
-// ifft.
-// Calculate inverse FFT of frequency-domain representation, Xk.
-// 
-cvec_o ifft(cvec_o Xk);
-
 #endif // DSPFOURIER_H
 
