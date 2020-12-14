@@ -28,11 +28,6 @@ cvec_o fft(cvec_o arg_xn)
   for (_n = 0; _n < arg_xn.len; _n++) { sel_xn.arr[_n] = arg_xn.arr[_n]; }
   for (_n = arg_xn.len; _n < newLength; _n++) { sel_xn.arr[_n] = 0; }
 
-printf("fft: all terms in sel_xn:\n");
-int32_t _p = 0;
-for (_p = 0; _p < sel_xn.len; _p++)
-{ printf("%lf + j%lf\n", creal(sel_xn.arr[_p]), cimag(sel_xn.arr[_p])); }
-
   // vars.
   cvec_o Xk = new_cvec(sel_xn.len);
   cvec_o Xkbuf = new_cvec(sel_xn.len);
@@ -58,13 +53,10 @@ for (_p = 0; _p < sel_xn.len; _p++)
     int32_t tw_m = 0;
     double tw_p = 0;
   
-printf("fft: initial counter values: %d, %d, %d, %d, %d\n"
-, depth, y_int, gap, inst_N, m);
-  
   // run depth-count down.
   while (depth > 0)
   {
-printf("fft: depth is %d\n", depth);
+// printf("fft: depth is %d\n", depth);
 
     for (y_int = 0; y_int < (gap >> 1); y_int++)
     {

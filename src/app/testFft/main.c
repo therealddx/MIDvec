@@ -25,11 +25,11 @@ double cmag(double complex arg)
 
 int main()
 {
-  cvec_o testSignal = new_cvec(128);
+  cvec_o testSignal = new_cvec(2048);
   int32_t _n = 0;
   for (_n = 0; _n < testSignal.len; _n++)
   {
-    testSignal.arr[_n] = sin(1.0 * (double)_n);
+    testSignal.arr[_n] = sin(0.1 * (double)_n);
   }
 
   cvec_o testFft = fft(testSignal);
