@@ -23,22 +23,6 @@ double cmag(double complex arg)
   return sqrt(creal(arg) * creal(arg) + cimag(arg) * cimag(arg));
 }
 
-cvec_o upcast_dvec(dvec_o arg_dvec)
-{
-  // vars.
-  cvec_o toReturn = new_cvec(arg_dvec.len);
-  int32_t _n = 0;
-
-  // copy.
-  for (_n = 0; _n < arg_dvec.len; _n++)
-  {
-    toReturn.arr[_n] = arg_dvec.arr[_n] + I * 0;
-  }
-
-  // ret.
-  return toReturn;
-}
-
 int main()
 {
   const u_int64_t BUF_LEN = 65536;

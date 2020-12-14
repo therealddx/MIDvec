@@ -45,5 +45,7 @@ void del_dvec(dvec_o arg_dvec);
 
 void del_cvec(cvec_o arg_cvec);
 
+cvec_o upcast_dvec(dvec_o arg_dvec);
+
 #endif // VEC_H
 
