@@ -87,18 +87,26 @@ cvec_o fft(cvec_o arg_xn)
       tw_m = 0;
     } // printf("y_int loop done\r\n");
     
-    Xk = copy_cvec(Xkbuf);
+    rcopy_cvec(&Xkbuf, &Xk);
     
     depth--;
     inst_N <<= 1;
     gap >>= 1;
   }
 
-  // scale down X[k] result.
+  // finalize:
+  //  scale down X[k] result.
+  //  delete locally-generated vectors.
   //
+
+  // scale down X[k] result.
   int32_t _m = 0;
   double scaleDown = 1.0 / (double)(Xk.len);
   for (_m = 0; _m < Xk.len; _m++) { Xk.arr[_m] *= scaleDown; }
+
+  // delete locally-generated vectors.
+  del_cvec(Xkbuf);
+  del_cvec(sel_xn);
 
   // ret.
   return Xk;
