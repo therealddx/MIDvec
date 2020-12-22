@@ -17,9 +17,9 @@
 #include <math.h>
 #include <stdio.h>
 
-#include <vec.h>
-#include <vecOps.h>
-#include <libMath.h>
+#include <math/vec.h>
+#include <math/vecOps.h>
+#include <math/libMath.h>
 
 typedef enum WindowSelection
 {

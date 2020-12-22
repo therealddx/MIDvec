@@ -15,7 +15,7 @@
 
 // include: midvec.
 //
-#include <vec.h>
+#include <math/vec.h>
 
 // conv.
 // Convolve xn with hn. Output is same length as longest of xn and hn.

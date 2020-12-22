@@ -12,7 +12,7 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include <vec.h>
+#include <math/vec.h>
 
 dvec_o mul_dvec(dvec_o, dvec_o);
 

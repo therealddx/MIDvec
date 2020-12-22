@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 // include: midvec library.
-#include <vec.h>
+#include <math/vec.h>
 
 // fft.
 // Calculate FFT of xn.
