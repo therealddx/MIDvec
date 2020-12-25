@@ -29,9 +29,9 @@ GLuint compileShader
     assert(0);
   }
 
-  // read bytes from 'arg_glslFile' (max 1KB).
+  // read bytes from 'arg_glslFile' (max 4KB).
   //
-  size_t maxSourceBytes = 1024;
+  size_t maxSourceBytes = 4096;
   char* shaderSourceBuffer = (char*)malloc(sizeof(char) * maxSourceBytes);
   size_t rBytes = fread
     ( shaderSourceBuffer

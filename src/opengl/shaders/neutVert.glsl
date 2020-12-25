@@ -1,3 +1,10 @@
+// 
+// reference LICENSE file provided.
+// 
+// neutVert.glsl
+// super-simple ('neutral') vertex shader file.
+// 
+
 #version 330 core
 
 layout (location = 0) in vec3 arg_pos;

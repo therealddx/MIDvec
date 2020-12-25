@@ -33,5 +33,15 @@ glTriangle_o new_glTriangle();
 
 void setTriangleVertex(glTriangle_o, TriangleVertex, float, float);
 
+void drawTriangle(glTriangle_o);
+
+void configureVertShader
+  ( glTriangle_o arg_tri
+  , float arg_Sx
+  , float arg_Sy
+  , float arg_Tx
+  , float arg_Ty
+  );
+
 #endif // GLTRIANGLE_H
 

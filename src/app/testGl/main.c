@@ -14,13 +14,13 @@ void main()
   // initialize context for drawing a damn triangle.
   //
   GLFWwindow* myWindow = setupGlfwGlew("My Test");
-  glTriangle_o myTriangle = new_glTriangle();
+  glTriangle_o mytri1 = new_glTriangle();
+  glTriangle_o mytri2 = new_glTriangle();
 
-  // mess with coordinates.
+  // mess with transform / scale.
   //
-  setTriangleVertex(myTriangle, Vert1, 0.3f, 0.3f);
-  setTriangleVertex(myTriangle, Vert2, 0.8f,-0.2f);
-  setTriangleVertex(myTriangle, Vert3,-0.2f,-0.2f);
+  configureVertShader(mytri1, 0.5f, 0.5f, 0.5f, 0.5f);
+  configureVertShader(mytri2, 0.1f, 0.1f, -0.5f, -0.5f);
 
   // drawing cycle:
   //  clear graph.
@@ -29,12 +29,16 @@ void main()
   //
   while (!glfwWindowShouldClose(myWindow))
   {
-    glClear(GL_COLOR_BUFFER_BIT);
+    // drawdelegate
+    //
+    drawTriangle(mytri1);
+    drawTriangle(mytri2);
 
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
+    // winman
+    //
     glfwSwapBuffers(myWindow);
     glfwPollEvents();
+    glClear(GL_COLOR_BUFFER_BIT);
   }
 
   // ret.
