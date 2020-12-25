@@ -25,7 +25,7 @@ GLuint compileShader
   FILE* f_readShaderSource = fopen(arg_glslFile, "rb");
   if (f_readShaderSource == NULL)
   {
-    printf("compileShader: bad file\n");
+    fprintf(stderr, "compileShader: bad file\n");
     assert(0);
   }
 
@@ -43,7 +43,7 @@ GLuint compileShader
 
   if (rBytes < 0)
   {
-    printf("compileShader: bad fread\n");
+    fprintf(stderr, "compileShader: bad fread\n");
     assert(0);
   }
   shaderSourceBuffer[rBytes] = '\0';
@@ -65,8 +65,8 @@ GLuint compileShader
   {
     char errorMsg[512];
     glGetShaderInfoLog(rtn_shaderGLID, 512, NULL, errorMsg);
-    printf("compileShader: error: GLID %d: %s\n", rtn_shaderGLID, errorMsg);
-    printf("compileShader: shader source:\n%s\n", shaderSourceBuffer);
+    fprintf(stderr, "compileShader: error: GLID %d: %s\n", rtn_shaderGLID, errorMsg);
+    fprintf(stderr, "compileShader: shader source:\n%s\n", shaderSourceBuffer);
     assert(0);
   }
 

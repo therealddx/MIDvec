@@ -35,7 +35,7 @@ void rcopy_dvec(dvec_o* arg_src, dvec_o* rtn_dst)
   // arg check.
   if (arg_src == NULL || rtn_dst == NULL)
   {
-    printf("rcopy_dvec: null reference");
+    fprintf(stderr, "rcopy_dvec: null reference");
     assert(0);
   }
 
@@ -52,7 +52,7 @@ void rcopy_cvec(cvec_o* arg_src, cvec_o* rtn_dst)
   // arg check.
   if (arg_src == NULL || rtn_dst == NULL)
   {
-    printf("rcopy_cvec: null reference");
+    fprintf(stderr, "rcopy_cvec: null reference");
     assert(0);
   }
 

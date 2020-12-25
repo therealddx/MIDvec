@@ -22,7 +22,7 @@ WindowSelection_e pick_window(double arg_stopbandGain)
   else if (stopband_gain_dB > -74.0) { rtn_window = BLACKMAN; }
   else
   {
-    printf("pick_window: bad input\n");
+    fprintf(stderr, "pick_window: bad input\n");
     assert(0);
   }
   
@@ -74,7 +74,7 @@ dvec_o generate_window(
   }
   else
   {
-    printf("generate_window: bad input\n");
+    fprintf(stderr, "generate_window: bad input\n");
     assert(0);
   }
 
@@ -98,7 +98,7 @@ int32_t get_filter_length(
   else if (sel_window == BLACKMAN) { M = (int32_t)(12.0*M_PI / dw); } 
   else
   {
-    printf("get_filter_length: bad input\n");
+    fprintf(stderr, "get_filter_length: bad input\n");
     assert(0);
   }
 

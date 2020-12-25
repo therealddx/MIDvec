@@ -13,7 +13,7 @@ dvec_o mul_dvec(dvec_o arg_v1, dvec_o arg_v2)
   // arg check: vector lengths.
   if (arg_v1.len != arg_v2.len)
   {
-    printf("mul_dvec: bad vector lengths\n");
+    fprintf(stderr, "mul_dvec: bad vector lengths\n");
     assert(0);
   }
 
@@ -36,7 +36,7 @@ cvec_o mul_cvec(cvec_o arg_v1, cvec_o arg_v2)
   // arg check: vector lengths.
   if (arg_v1.len != arg_v2.len)
   {
-    printf("mul_cvec: bad vector lengths\n");
+    fprintf(stderr, "mul_cvec: bad vector lengths\n");
     assert(0);
   }
 
@@ -59,7 +59,7 @@ dvec_o add_dvec(dvec_o arg_v1, dvec_o arg_v2)
   // arg check: vector lengths.
   if (arg_v1.len != arg_v2.len)
   {
-    printf("add_dvec: bad vector lengths\n");
+    fprintf(stderr, "add_dvec: bad vector lengths\n");
     assert(0);
   }
 
@@ -82,7 +82,7 @@ cvec_o add_cvec(cvec_o arg_v1, cvec_o arg_v2)
   // arg check: vector lengths.
   if (arg_v1.len != arg_v2.len)
   {
-    printf("add_cvec: bad vector lengths\n");
+    fprintf(stderr, "add_cvec: bad vector lengths\n");
     assert(0);
   }
 
