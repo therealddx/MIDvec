@@ -6,6 +6,8 @@
  *
  */
 
+#include <sys/types.h>
+
 #include <opengl/glSetup.h>
 #include <opengl/glTriangle.h>
 
@@ -14,13 +16,28 @@ void main()
   // initialize context for drawing a damn triangle.
   //
   GLFWwindow* myWindow = setupGlfwGlew("My Test");
-  glTriangle_o mytri1 = new_glTriangle();
-  glTriangle_o mytri2 = new_glTriangle();
 
-  // mess with transform / scale.
+  // goal: make a 3-by-3 grid of differently-scaled triangles.
   //
-  configureVertShader(mytri1, 0.5f, 0.5f, 0.5f, 0.5f);
-  configureVertShader(mytri2, 0.1f, 0.1f, -0.5f, -0.5f);
+  u_int32_t NUM_TRIS = 9;
+  u_int32_t DIM_TRIS = 3;
+  glTriangle_o* mytris = malloc(NUM_TRIS * sizeof(glTriangle_o));
+  
+  u_int32_t _n = 0;
+  for (_n = 0; _n < NUM_TRIS; _n++)
+  {
+    mytris[_n] = new_glTriangle();
+
+    u_int32_t rowInd = _n / DIM_TRIS;
+    u_int32_t colInd = _n % DIM_TRIS;
+    float scaleKey = (float)(rowInd + 1) + (float)(colInd + 1);
+
+    float xDelta = -0.5f + (float)colInd * 0.5f;
+    float yDelta = 0.5f - (float)rowInd * 0.5f;
+    float xScale = scaleKey * 0.02f;
+    float yScale = scaleKey * 0.05f;
+    configureVertShader(mytris[_n], xScale, yScale, xDelta, yDelta);
+  }
 
   // drawing cycle:
   //  clear graph.
@@ -29,12 +46,14 @@ void main()
   //
   while (!glfwWindowShouldClose(myWindow))
   {
-    // drawdelegate
+    // draw delegate.
     //
-    drawTriangle(mytri1);
-    drawTriangle(mytri2);
+    for (_n = 0; _n < NUM_TRIS; _n++)
+    {
+      drawTriangle(mytris[_n]);
+    }
 
-    // winman
+    // window management functions.
     //
     glfwSwapBuffers(myWindow);
     glfwPollEvents();
