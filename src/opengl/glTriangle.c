@@ -58,11 +58,32 @@ glTriangle_o new_glTriangle()
   bpShader_o shaderBlueprints[] = { bpVertShader, bpFragShader };
   toReturn._shaderProgram = buildShader(shaderBlueprints, 2);
 
-  glUseProgram(toReturn._shaderProgram);
-
   // ret.
   //
   return toReturn;
+}
+
+void del_triangle(glTriangle_o arg_tri)
+{
+  // _vertices: delete unconditionally.
+  //   data was malloc'd in; no longer relevant.
+  //
+  free(arg_tri._vertices);
+
+  // _vbo: delete unconditionally.
+  //   VBO is designed for one-to-one association with backing-data.
+  // 
+  glDeleteBuffers(1, &arg_tri._vbo);
+
+  // _vao: delete unconditionally.
+  //   VAO is designed for one-to-one association with VBO.
+  //
+  glDeleteVertexArrays(1, &arg_tri._vao);
+
+  // _shaderProgram: delete unconditionally.
+  //   the shader program is created by 'new', so 'del' should destroy it.
+  // 
+  glDeleteProgram(arg_tri._shaderProgram);
 }
 
 void setTriangleVertex
@@ -141,4 +162,5 @@ void configureVertShader
     glGetUniformLocation(arg_tri._shaderProgram, "u_Ty");
   glUniform1f(uloc_Ty, arg_Ty);
 }
+
 

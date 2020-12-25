@@ -31,6 +31,8 @@ typedef struct
 
 glTriangle_o new_glTriangle();
 
+void del_triangle(glTriangle_o);
+
 void setTriangleVertex(glTriangle_o, TriangleVertex, float, float);
 
 void drawTriangle(glTriangle_o);

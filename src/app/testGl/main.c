@@ -36,6 +36,7 @@ void main()
     float yDelta = 0.5f - (float)rowInd * 0.5f;
     float xScale = scaleKey * 0.02f;
     float yScale = scaleKey * 0.05f;
+
     configureVertShader(mytris[_n], xScale, yScale, xDelta, yDelta);
   }
 
@@ -60,7 +61,16 @@ void main()
     glClear(GL_COLOR_BUFFER_BIT);
   }
 
+  // teardown.
+  //
+  for (_n = 0; _n < NUM_TRIS; _n++)
+  {
+    del_triangle(mytris[_n]);
+  }
+  free(mytris);
+
   // ret.
+  //
   glfwTerminate();
   return;
 }
