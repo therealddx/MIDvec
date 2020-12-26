@@ -1,3 +1,13 @@
+/*
+ * reference LICENSE file provided.
+ *
+ * buildShader.h
+ *
+ * Encapsulated functions for creating shader programs within the 
+ * OpenGL space.
+ *
+ */
+
 #ifndef BUILDSHADER_H
 #define BUILDSHADER_H
 

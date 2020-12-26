@@ -1,4 +1,6 @@
 /*
+ * reference LICENSE file provided.
+ *
  * buildShader.c
  *
  * Implements buildShader.h.
