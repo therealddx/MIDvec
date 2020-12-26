@@ -102,6 +102,7 @@ glCartesian_o new_glCartesian()
   }
   toReturn._w = toReturn._points;
   toReturn._r = toReturn._points;
+  toReturn._len = CARTESIAN_POINT_CAPACITY;
 
   // shaders.
   //
@@ -112,6 +113,8 @@ glCartesian_o new_glCartesian()
   bpShader_o shaderBlueprints[] = { bpVertShader, bpFragShader };
   toReturn._shaderProgram = buildShader(shaderBlueprints, 2);
 
+  set_glCartesian(toReturn, -1.0f, 1.0f, -1.0f, 1.0f);
+
   // ret.
   //
   return toReturn;
@@ -119,15 +122,6 @@ glCartesian_o new_glCartesian()
 
 void del_glCartesian(glCartesian_o arg_carte)
 {
- /* 
-  * typedef struct
-  * {
-  *   glCartesianPoint_o* _points;
-  *   GLuint _shaderProgram;
-  * } glCartesian_o;
-  *
-  */
-
   // release all glCartesianPoints, then release this memory.
   //
   u_int32_t _n = 0;
@@ -136,6 +130,9 @@ void del_glCartesian(glCartesian_o arg_carte)
     del_glCartesianPoint(arg_carte._points[_n]);
   }
   free(arg_carte._points);
+  arg_carte._w = NULL;
+  arg_carte._r = NULL;
+  arg_carte._len = 0;
 
   // release shadprog.
   // 
@@ -210,5 +207,22 @@ void set_glCartesian
   glUniform1f(uloc_Sy, new_Sy);
   glUniform1f(uloc_Tx, new_Tx);
   glUniform1f(uloc_Ty, new_Ty);
+}
+
+void draw_glCartesian(glCartesian_o arg_glc)
+{
+  // get the shadprog.
+  //
+  glUseProgram(arg_glc._shaderProgram);
+
+  // for each point you have, lock-on and draw.
+  // 
+  u_int32_t _n = 0;
+  for (_n = 0; _n < CARTESIAN_POINT_CAPACITY; _n++)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, arg_glc._points[_n]._vbo);
+    glBindVertexArray(arg_glc._points[_n]._vao);
+    glDrawArrays(GL_TRIANGLES, 0, VERTS_PER_CARTESIAN_POINT);
+  }
 }
 

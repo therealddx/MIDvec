@@ -44,6 +44,7 @@ typedef struct
   glCartesianPoint_o* _w;
   glCartesianPoint_o* _r;
   glCartesianPoint_o* _points;
+  u_int32_t _len;
   GLuint _shaderProgram;
 } glCartesian_o;
 
@@ -59,7 +60,9 @@ void set_glCartesianPoint(glCartesianPoint_o, float, float);
 
 void set_glCartesian(glCartesian_o, float, float, float, float);
 
-// todo: two more functions to write.
+void draw_glCartesian(glCartesian_o);
+
+// todo: more functions to write.
 // 
 
 void plotPoints
@@ -67,8 +70,6 @@ void plotPoints
   , glCartesianPoint_o* arg_newPoints
   , u_int32_t arg_numNewPoints
   );
-
-void drawPlane(glCartesian_o);
 
 #endif // GLCARTESIAN_H
 
