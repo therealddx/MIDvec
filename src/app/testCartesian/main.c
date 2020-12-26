@@ -8,6 +8,7 @@
 
 #include <sys/types.h>
 #include <math.h>
+#include <unistd.h>
 
 #include <opengl/glSetup.h>
 #include <opengl/glTriangle.h>
@@ -23,12 +24,16 @@ void main()
   // nincompoop
   //
   glCartesian_o mycart = new_glCartesian();
+  float xMin = -1.0f;
+  float xMax =  1.0f;
+  float yMin = -1.0f;
+  float yMax =  1.0f;
 
   u_int32_t _n = 0;
   for (_n = 0; _n < mycart._len; _n++)
   {
-    float z = (float)_n / (float)mycart._len * 2.0f - 1.0f;
-    set_glCartesianPoint(mycart._points[_n], z, sin(0.01 * _n));
+    float x = (float)_n / ((float)mycart._len - 1.0f) * 2.0f - 1.0f;
+    set_glCartesianPoint(mycart._points[_n], x, sin(M_PI * x));
   }
 
   // drawing cycle:
@@ -47,6 +52,13 @@ void main()
     glfwSwapBuffers(myWindow);
     glfwPollEvents();
     glClear(GL_COLOR_BUFFER_BIT);
+
+    // prep for next draw. (zoom into upper-right quadrant).
+    //
+    xMin += 0.005f;
+    yMin += 0.005f;
+    usleep(100000);
+    set_glCartesian(mycart, xMin, xMax, yMin, yMax);
   }
 
   // teardown.
