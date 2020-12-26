@@ -11,17 +11,12 @@
 #include <math.h>
 #include <sys/types.h>
 
-#include <vec.h>
-#include <vecOps.h>
-#include <dspConv.h>
-#include <dspFourier.h>
-#include <dspFilter.h>
-#include <libMath.h>
-
-double cmag(double complex arg)
-{
-  return sqrt(creal(arg) * creal(arg) + cimag(arg) * cimag(arg));
-}
+#include <math/vec.h>
+#include <math/vecOps.h>
+#include <math/libMath.h>
+#include <dsp/dspConv.h>
+#include <dsp/dspFourier.h>
+#include <dsp/dspFilter.h>
 
 int main()
 {

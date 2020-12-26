@@ -8,6 +8,11 @@
 
 #include "libMath.h"
 
+double cmag(double complex x)
+{
+  return sqrt(creal(x) * creal(x) + cimag(x) * cimag(x));
+}
+
 double sinc(double x)
 {
   if (x == 0)

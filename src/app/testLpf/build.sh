@@ -12,6 +12,7 @@ export PATH_SRC=/home/dev/Work/midvec/src
 
 gcc -I"$PATH_SRC" \
   main.c \
-  $(find "$PATH_SRC" -type f -name '*.c' | grep -v '/app/') \
+  $(find "$PATH_SRC"/dsp/ -type f -name '*.c') \
+  $(find "$PATH_SRC"/math/ -type f -name '*.c') \
   -lm -o "$PWD"/bin/midvec.out
 

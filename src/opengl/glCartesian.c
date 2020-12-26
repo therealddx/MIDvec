@@ -209,6 +209,55 @@ void set_glCartesian
   glUniform1f(uloc_Ty, new_Ty);
 }
 
+void get_glCartesian
+  ( glCartesian_o arg_glc
+  , float* rtn_xMin
+  , float* rtn_xMax
+  , float* rtn_yMin
+  , float* rtn_yMax
+  )
+{
+  // arg check: null pointers
+  //
+  if ( rtn_xMin == NULL
+    || rtn_xMax == NULL
+    || rtn_yMin == NULL
+    || rtn_yMax == NULL)
+  {
+    fprintf(stderr, "get_glCartesian: null reference");
+    assert(0);
+  }
+
+  // vars.
+  // 
+  float rtn_Sx;
+  float rtn_Sy;
+  float rtn_Tx;
+  float rtn_Ty;
+
+  // retrieve uniform locations.
+  //
+  GLint uloc_Sx = glGetUniformLocation(arg_glc._shaderProgram, "u_Sx");
+  GLint uloc_Sy = glGetUniformLocation(arg_glc._shaderProgram, "u_Sy");
+  GLint uloc_Tx = glGetUniformLocation(arg_glc._shaderProgram, "u_Tx");
+  GLint uloc_Ty = glGetUniformLocation(arg_glc._shaderProgram, "u_Ty");
+
+  // retrieve uniform values.
+  // 
+  glGetUniformfv(arg_glc._shaderProgram, uloc_Sx, &rtn_Sx);
+  glGetUniformfv(arg_glc._shaderProgram, uloc_Sy, &rtn_Sy);
+  glGetUniformfv(arg_glc._shaderProgram, uloc_Tx, &rtn_Tx);
+  glGetUniformfv(arg_glc._shaderProgram, uloc_Ty, &rtn_Ty);
+
+  // map uniform values to window bounds.
+  //
+  *rtn_xMin = -1.0f * (rtn_Tx + 1.0f) / rtn_Sx;
+  *rtn_yMin = -1.0f * (rtn_Ty + 1.0f) / rtn_Sy;
+  
+  *rtn_xMax = 2.0f / rtn_Sx + *rtn_xMin;
+  *rtn_yMax = 2.0f / rtn_Sy + *rtn_yMin;
+}
+
 void draw_glCartesian(glCartesian_o arg_glc)
 {
   // get the shadprog.

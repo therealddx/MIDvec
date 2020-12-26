@@ -152,8 +152,3 @@ void updateGraph(cvec_o arg_fft, glFourierContext_o arg_context)
   }
 }
 
-double cmag(double complex arg)
-{
-  return sqrt(creal(arg) * creal(arg) + cimag(arg) * cimag(arg));
-}
-

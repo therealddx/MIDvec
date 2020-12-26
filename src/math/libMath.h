@@ -12,6 +12,9 @@
 
 #include <stdlib.h>
 #include <math.h>
+#include <complex.h>
+
+double cmag(double complex x);
 
 double sinc(double x);
 

@@ -60,6 +60,8 @@ void set_glCartesianPoint(glCartesianPoint_o, float, float);
 
 void set_glCartesian(glCartesian_o, float, float, float, float);
 
+void get_glCartesian(glCartesian_o, float*, float*, float*, float*);
+
 void draw_glCartesian(glCartesian_o);
 
 // todo: more functions to write.
