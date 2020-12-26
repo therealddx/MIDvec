@@ -65,7 +65,7 @@ void main()
   //
   for (_n = 0; _n < NUM_TRIS; _n++)
   {
-    del_triangle(mytris[_n]);
+    del_glTriangle(mytris[_n]);
   }
   free(mytris);
 

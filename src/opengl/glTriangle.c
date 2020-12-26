@@ -63,7 +63,7 @@ glTriangle_o new_glTriangle()
   return toReturn;
 }
 
-void del_triangle(glTriangle_o arg_tri)
+void del_glTriangle(glTriangle_o arg_tri)
 {
   // _vertices: delete unconditionally.
   //   data was malloc'd in; no longer relevant.
