@@ -67,16 +67,6 @@ glCartesianPoint_o new_glCartesianPoint(cartesianPoint_o* arg_origPos)
 
 void del_glCartesianPoint(glCartesianPoint_o arg_point)
 {
-  /*
-   * typedef struct
-   * {
-   *   float* _vertices;
-   *   GLuint _vbo;
-   *   GLuint _vao;
-   * } glCartesianPoint_o;
-   *
-   */
-
   // release _vertices / _vbo / _vao.
   //
   free(arg_point._vertices);
@@ -89,17 +79,19 @@ glCartesian_o new_glCartesian()
   /*
    * typedef struct
    * {
+   *   glCartesianPoint_o* _w;
+   *   glCartesianPoint_o* _r;
    *   glCartesianPoint_o* _points;
    *   GLuint _shaderProgram;
    * } glCartesian_o;
-   * 
+   *
    */
-  
+
   // vars.
   //
   glCartesian_o toReturn;
 
-  // points.
+  // points + ringbuffer pointers.
   //
   toReturn._points = (glCartesianPoint_o*)malloc(
     CARTESIAN_POINT_CAPACITY * CARTESIAN_POINT_SIZE);
@@ -108,6 +100,8 @@ glCartesian_o new_glCartesian()
   {
     toReturn._points[_n] = new_glCartesianPoint(NULL);
   }
+  toReturn._w = toReturn._points;
+  toReturn._r = toReturn._points;
 
   // shaders.
   //

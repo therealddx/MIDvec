@@ -59,7 +59,7 @@ void set_glCartesianPoint(glCartesianPoint_o, float, float);
 
 void set_glCartesian(glCartesian_o, float, float, float, float);
 
-// _unwritten functions start here_
+// todo: two more functions to write.
 // 
 
 void plotPoints
