@@ -1,0 +1,3 @@
+[submodule "src/opengl"]
+	path = src/opengl
+	url = git@github.com:therealddx/graph-opengl
